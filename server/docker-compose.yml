@@ -1,0 +1,37 @@
+name: kansight-server
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: kansight
+      POSTGRES_PASSWORD: kansight
+      POSTGRES_DB: kansight
+    ports:
+      - "5432:5432"
+    volumes:
+      - kansight_postgres_data:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: kansight
+      DB_PASSWORD: kansight
+      DB_NAME: kansight
+      DATABASE_URL: postgres://kansight:kansight@postgres:5432/kansight
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+
+volumes:
+  kansight_postgres_data:
