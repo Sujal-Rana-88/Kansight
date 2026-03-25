@@ -3,10 +3,12 @@ name: kansight-server
 services:
   postgres:
     image: postgres:16-alpine
+    env_file:
+      - ./.env
     environment:
-      POSTGRES_USER: kansight
-      POSTGRES_PASSWORD: kansight
-      POSTGRES_DB: kansight
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -16,14 +18,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: sh -c "npm install && npm run start:dev"
+    env_file:
+      - ./.env
     environment:
-      PORT: 3000
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: kansight
-      DB_PASSWORD: kansight
-      DB_NAME: kansight
-      DATABASE_URL: postgres://kansight:kansight@postgres:5432/kansight
+      PORT: ${PORT:-3000}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      REFRESH_TOKEN_EXPIRES_DAYS: ${REFRESH_TOKEN_EXPIRES_DAYS}
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - postgres
