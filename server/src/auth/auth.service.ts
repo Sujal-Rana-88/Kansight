@@ -56,7 +56,7 @@ export class AuthService {
       this.users.create({
         id: randomUUID(),
         email,
-        password_hash: passwordHash,
+        password: passwordHash,
         is_email_verified: false,
         failed_login_attempts: 0,
       }),
@@ -112,12 +112,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials.');
     }
 
-    if (!user.password_hash) {
+    if (!user.password) {
       this.logger.warn(`Login blocked (no password) user=${user.id}`);
       throw new UnauthorizedException('Password login not available.');
     }
 
-    const isValid = await bcrypt.compare(password, user.password_hash);
+    const isValid = await bcrypt.compare(password, user.password);
 
     if (!isValid) {
       this.logger.warn(`Login failed: bad password user=${user.id}`);

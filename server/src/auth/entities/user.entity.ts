@@ -18,7 +18,7 @@ export class User {
   email: string;
 
   @Column({ type: 'text', nullable: true })
-  password_hash: string | null;
+  password: string | null;
 
   @Column({ default: false })
   is_email_verified: boolean;

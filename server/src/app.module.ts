@@ -7,6 +7,10 @@ import { User } from './auth/entities/user.entity';
 import { Session } from './auth/entities/session.entity';
 import { RefreshToken } from './auth/entities/refresh-token.entity';
 import { OAuthAccount } from './auth/entities/oauth-account.entity';
+import { Organization } from './organizations/entities/organization.entity';
+import { OrganizationMembership } from './organizations/entities/organization-membership.entity';
+import { Project } from './organizations/entities/project.entity';
+import { OrganizationsModule } from './organizations/organizations.module';
 
 @Module({
   imports: [
@@ -18,10 +22,19 @@ import { OAuthAccount } from './auth/entities/oauth-account.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Session, RefreshToken, OAuthAccount],
+      entities: [
+        User,
+        Session,
+        RefreshToken,
+        OAuthAccount,
+        Organization,
+        OrganizationMembership,
+        Project,
+      ],
       synchronize: true,
     }),
     AuthModule,
+    OrganizationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
