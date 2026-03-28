@@ -21,7 +21,6 @@ out/
 
 # env files
 .env
-.env.*
 
 # misc
 .DS_Store
