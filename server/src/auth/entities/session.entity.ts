@@ -13,26 +13,26 @@ import { RefreshToken } from './refresh-token.entity';
 @Entity('sessions')
 export class Session {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ManyToOne(() => User, (user) => user.sessions, { onDelete: 'CASCADE' })
-  user: User;
+  user!: User;
 
   @Column({ type: 'text', nullable: true })
-  ip_address: string | null;
+  ip_address!: string | null;
 
   @Column({ type: 'text', nullable: true })
-  user_agent: string | null;
+  user_agent!: string | null;
 
   @Column({ type: 'text', nullable: true })
-  device_name: string | null;
+  device_name!: string | null;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
-  last_active_at: Date;
+  last_active_at!: Date;
 
   @OneToMany(() => RefreshToken, (token) => token.session)
-  refresh_tokens: RefreshToken[];
+  refresh_tokens!: RefreshToken[];
 }

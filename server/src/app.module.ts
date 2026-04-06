@@ -11,6 +11,11 @@ import { Organization } from './organizations/entities/organization.entity';
 import { OrganizationMembership } from './organizations/entities/organization-membership.entity';
 import { Project } from './organizations/entities/project.entity';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { EventsModule } from './events/events.module';
+import { RawEvent } from './events/entities/raw-event.entity';
+import { SessionSummary } from './events/entities/session-summary.entity';
+import { UserProductStats } from './events/entities/user-product-stats.entity';
+import { InsightsModule } from './insights/insights.module';
 
 @Module({
   imports: [
@@ -30,11 +35,16 @@ import { OrganizationsModule } from './organizations/organizations.module';
         Organization,
         OrganizationMembership,
         Project,
+        RawEvent,
+        SessionSummary,
+        UserProductStats,
       ],
       synchronize: true,
     }),
     AuthModule,
     OrganizationsModule,
+    EventsModule,
+    InsightsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

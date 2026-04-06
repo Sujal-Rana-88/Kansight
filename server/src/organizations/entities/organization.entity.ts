@@ -15,33 +15,33 @@ import { Project } from './project.entity';
 @Entity('organizations')
 export class Organization {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ type: 'text' })
-  name: string;
+  name!: string;
 
   @Column({ unique: true, type: 'text' })
-  slug: string;
+  slug!: string;
 
   @ManyToOne(() => User, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'owner_id' })
-  owner: User;
+  owner!: User;
 
   @Column({ type: 'text', default: 'free' })
-  plan: string;
+  plan!: string;
 
   @Column({ type: 'text', default: 'active' })
-  status: string;
+  status!: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
+  created_at!: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
-  updated_at: Date;
+  updated_at!: Date;
 
   @OneToMany(() => OrganizationMembership, (m) => m.organization)
-  memberships: OrganizationMembership[];
+  memberships!: OrganizationMembership[];
 
   @OneToMany(() => Project, (project) => project.organization)
-  projects: Project[];
+  projects!: Project[];
 }

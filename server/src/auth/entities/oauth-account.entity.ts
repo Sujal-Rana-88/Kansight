@@ -13,17 +13,17 @@ import { User } from './user.entity';
 @Unique(['user', 'provider'])
 export class OAuthAccount {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ManyToOne(() => User, (user) => user.oauth_accounts, { onDelete: 'CASCADE' })
-  user: User;
+  user!: User;
 
   @Column()
-  provider: string;
+  provider!: string;
 
   @Column()
-  provider_id: string;
+  provider_id!: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
+  created_at!: Date;
 }

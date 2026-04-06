@@ -1,8 +1,13 @@
 name: kansight-server
 
 services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
   postgres:
-    image: postgres:16-alpine
+    image: pgvector/pgvector:pg16
     env_file:
       - ./.env
     environment:
@@ -35,6 +40,7 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
       - postgres
+      - redis
     ports:
       - "3000:3000"
     volumes:

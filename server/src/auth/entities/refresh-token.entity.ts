@@ -11,25 +11,25 @@ import { Session } from './session.entity';
 @Entity('refresh_tokens')
 export class RefreshToken {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ManyToOne(() => User, (user) => user.refresh_tokens, { onDelete: 'CASCADE' })
-  user: User;
+  user!: User;
 
   @ManyToOne(() => Session, (session) => session.refresh_tokens, {
     onDelete: 'CASCADE',
   })
-  session: Session;
+  session!: Session;
 
   @Column()
-  token_hash: string;
+  token_hash!: string;
 
   @Column({ type: 'timestamptz' })
-  expires_at: Date;
+  expires_at!: Date;
 
   @Column({ default: false })
-  revoked: boolean;
+  revoked!: boolean;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
+  created_at!: Date;
 }

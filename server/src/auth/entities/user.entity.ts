@@ -12,29 +12,29 @@ import { OAuthAccount } from './oauth-account.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ unique: true })
-  email: string;
+  email!: string;
 
   @Column({ type: 'text', nullable: true })
-  password: string | null;
+  password!: string | null;
 
   @Column({ default: false })
-  is_email_verified: boolean;
+  is_email_verified!: boolean;
 
   @Column({ default: 0 })
-  failed_login_attempts: number;
+  failed_login_attempts!: number;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  created_at: Date;
+  created_at!: Date;
 
   @OneToMany(() => Session, (session) => session.user)
-  sessions: Session[];
+  sessions!: Session[];
 
   @OneToMany(() => RefreshToken, (token) => token.user)
-  refresh_tokens: RefreshToken[];
+  refresh_tokens!: RefreshToken[];
 
   @OneToMany(() => OAuthAccount, (oauth) => oauth.user)
-  oauth_accounts: OAuthAccount[];
+  oauth_accounts!: OAuthAccount[];
 }
