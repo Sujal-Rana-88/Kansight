@@ -16,6 +16,7 @@ import { RawEvent } from './events/entities/raw-event.entity';
 import { SessionSummary } from './events/entities/session-summary.entity';
 import { UserProductStats } from './events/entities/user-product-stats.entity';
 import { InsightsModule } from './insights/insights.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { InsightsModule } from './insights/insights.module';
     OrganizationsModule,
     EventsModule,
     InsightsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
